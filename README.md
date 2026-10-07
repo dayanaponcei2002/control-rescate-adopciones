@@ -20,4 +20,4 @@ Diseño lógico académico del sistema de control de rescates y adopciones.
 
 El enlace público debe ser reemplazado en el PDF y en este README después de crear el repositorio en GitHub:
 
-`https://github.com/USUARIO/control-rescate-adopciones`
+`https://github.com/dayanaponcei2002/control-rescate-adopciones`
