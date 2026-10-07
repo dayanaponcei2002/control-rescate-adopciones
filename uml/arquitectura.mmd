@@ -1,0 +1,11 @@
+%%{init: {'theme':'base','themeVariables': {'primaryColor':'#E8F1F8','primaryTextColor':'#17324D','primaryBorderColor':'#2B6E9E','lineColor':'#527A9E','secondaryColor':'#F7F4EA'}}}%%
+flowchart TB
+  ui["Web / móvil\nAPI REST"]
+  app["Capa de aplicación\nRescateService · AdopcionService\nNotificacionService"]
+  dom["Dominio\nEntidades · reglas · eventos\ninterfaces de repositorio"]
+  infra["Infraestructura\nPostgreSQL · almacenamiento de fotos\ncorreo/SMS · auditoría"]
+  ui-->app-->dom-->infra
+  ext["Servicios externos"]
+  infra-->ext
+  git["GitHub + Gitflow\nmain · develop · feature · release · hotfix"]
+  git -. gobierna .-> ui

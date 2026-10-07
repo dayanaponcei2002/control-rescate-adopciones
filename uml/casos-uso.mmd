@@ -1,0 +1,42 @@
+%%{init: {'theme':'base','themeVariables': {'primaryColor':'#E8F1F8','primaryTextColor':'#17324D','primaryBorderColor':'#2B6E9E','lineColor':'#527A9E','secondaryColor':'#F7F4EA','tertiaryColor':'#F3E8E8'}}}%%
+flowchart LR
+  adoptante([Adoptante])
+  rescatista([Rescatista])
+  coordinador([Coordinador])
+  veterinario([Veterinario])
+  admin([Administrador])
+  notif([Servicio de notificaciones])
+  subgraph S[Sistema de Control de Rescates y Adopciones]
+    uc1((Registrar reporte de rescate))
+    uc2((Validar y priorizar caso))
+    uc3((Asignar equipo de rescate))
+    uc4((Registrar atención veterinaria))
+    uc5((Publicar animal en adopción))
+    uc6((Postularse a adopción))
+    uc7((Evaluar postulación))
+    uc8((Formalizar adopción))
+    uc9((Consultar trazabilidad y reportes))
+    uc10((Gestionar usuarios y catálogos))
+    uc11((Enviar notificaciones))
+  end
+  adoptante---uc6
+  adoptante---uc8
+  rescatista---uc1
+  rescatista---uc3
+  rescatista---uc4
+  coordinador---uc2
+  coordinador---uc3
+  coordinador---uc5
+  coordinador---uc7
+  coordinador---uc8
+  coordinador---uc9
+  veterinario---uc4
+  admin---uc10
+  uc1-. incluye .->uc2
+  uc2-. incluye .->uc3
+  uc5-. incluye .->uc6
+  uc7-. incluye .->uc8
+  uc1-. notifica .->uc11
+  uc3-. notifica .->uc11
+  uc8-. notifica .->uc11
+  notif---uc11

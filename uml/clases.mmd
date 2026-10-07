@@ -1,0 +1,80 @@
+%%{init: {'theme':'base','themeVariables': {'primaryColor':'#E8F1F8','primaryTextColor':'#17324D','primaryBorderColor':'#2B6E9E','lineColor':'#527A9E','secondaryColor':'#F7F4EA'}}}%%
+classDiagram
+  class Usuario {
+    +UUID id
+    +String nombre
+    +String email
+    +Rol rol
+    +activar()
+  }
+  class Animal {
+    +UUID id
+    +String nombre
+    +Especie especie
+    +EstadoAnimal estado
+    +String microchip
+    +cambiarEstado()
+  }
+  class ReporteRescate {
+    +UUID id
+    +DateTime fecha
+    +String ubicacion
+    +String descripcion
+    +Prioridad prioridad
+    +EstadoRescate estado
+    +validar()
+  }
+  class OperacionRescate {
+    +UUID id
+    +DateTime inicio
+    +DateTime cierre
+    +EstadoOperacion estado
+    +asignarRecursos()
+    +cerrar()
+  }
+  class EvaluacionVeterinaria {
+    +UUID id
+    +String diagnostico
+    +String tratamiento
+    +Date fecha
+    +registrar()
+  }
+  class Postulacion {
+    +UUID id
+    +Date fecha
+    +EstadoPostulacion estado
+    +String observaciones
+    +evaluar()
+  }
+  class Adopcion {
+    +UUID id
+    +Date fecha
+    +String contratoUrl
+    +formalizar()
+  }
+  class RescateService {
+    +registrarReporte()
+    +priorizarCaso()
+    +asignarEquipo()
+  }
+  class AdopcionService {
+    +publicarAnimal()
+    +evaluarPostulacion()
+    +formalizarAdopcion()
+  }
+  class NotificacionService {
+    +enviar(Evento evento)
+  }
+  Usuario "1" --> "many" ReporteRescate : reporta
+  ReporteRescate "1" --> "0..1" Animal : identifica
+  ReporteRescate "1" --> "0..1" OperacionRescate : genera
+  OperacionRescate "many" --> "many" Usuario : equipo
+  Animal "1" --> "many" EvaluacionVeterinaria : recibe
+  Usuario "1" --> "many" Postulacion : presenta
+  Animal "1" --> "many" Postulacion : recibe
+  Postulacion "0..1" --> "0..1" Adopcion : culmina
+  Usuario "1" --> "many" Adopcion : adopta
+  RescateService ..> ReporteRescate : orquesta
+  AdopcionService ..> Postulacion : orquesta
+  NotificacionService ..> RescateService : observa
+  NotificacionService ..> AdopcionService : observa
